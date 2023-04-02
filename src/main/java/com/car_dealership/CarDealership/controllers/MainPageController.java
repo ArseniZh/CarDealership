@@ -3,6 +3,8 @@ package com.car_dealership.CarDealership.controllers;
 import com.car_dealership.CarDealership.models.Advertisement;
 import com.car_dealership.CarDealership.repositories.AdvertisementRepository;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +17,10 @@ public class MainPageController {
         return advertisementRepository.findAll();
     }
 
-    @GetMapping("/advertisement/{id}")
+    @GetMapping("/advertisements/{id}")
     public Advertisement getAdvertisement(@PathVariable("id") Advertisement advertisement) {
+        final Logger log = LoggerFactory.getLogger(MainPageController.class);
+        log.info(String.valueOf(advertisement));
         return advertisement;
     }
 
@@ -25,13 +29,13 @@ public class MainPageController {
         return advertisementRepository.save(advertisement);
     }
 
-    @PutMapping("/advertisement/{id}")
+    @PutMapping("/advertisements/{id}")
     public Advertisement updateAdvertisement(@PathVariable("id") Advertisement advertisement, @RequestBody Advertisement updatedAdvertisement) {
         BeanUtils.copyProperties(updatedAdvertisement, advertisement, "id");
         return advertisementRepository.save(advertisement);
     }
 
-    @DeleteMapping("/advertisement/{id}")
+    @DeleteMapping("/advertisements/{id}")
     public void deleteAdvertisement(@PathVariable("id") Advertisement advertisement) {
         advertisementRepository.delete(advertisement);
     }
