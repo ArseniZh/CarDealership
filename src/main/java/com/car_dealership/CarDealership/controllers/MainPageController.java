@@ -2,7 +2,6 @@ package com.car_dealership.CarDealership.controllers;
 
 import com.car_dealership.CarDealership.models.Advertisement;
 import com.car_dealership.CarDealership.repositories.AdvertisementRepository;
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,4 +29,8 @@ public class MainPageController {
         return advertisementRepository.save(advertisement);
     }
 
+    @DeleteMapping("/advertisement/{id}")
+    public void deleteAdvertisement(@PathVariable("id") Advertisement advertisement) {
+        advertisementRepository.delete(advertisement);
+    }
 }
