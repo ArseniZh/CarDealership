@@ -1,14 +1,14 @@
 package com.car_dealership.CarDealership.controllers;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class MainPageController {
 
     @GetMapping("/")
-    public String mainPage(Model model) {
-        return "mainPage";
+    public String mainPage() {
+        return "index";
     }
 }
