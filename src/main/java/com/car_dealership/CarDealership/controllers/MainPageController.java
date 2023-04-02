@@ -19,4 +19,10 @@ public class MainPageController {
         return advertisement;
     }
 
+    @PostMapping
+    public Advertisement addAdvertisement(@RequestBody Advertisement advertisement) {
+        return advertisementRepository.save(advertisement);
+    }
+
+
 }
