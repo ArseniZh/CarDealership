@@ -24,5 +24,10 @@ public class MainPageController {
         return advertisementRepository.save(advertisement);
     }
 
+    @PutMapping("/advertisement/{id}")
+    public Advertisement updateAdvertisement(@PathVariable("id") Advertisement advertisement, @RequestBody Advertisement updatedAdvertisement) {
+        BeanUtils.copyProperties(updatedAdvertisement, advertisement, "id");
+        return advertisementRepository.save(advertisement);
+    }
 
 }
