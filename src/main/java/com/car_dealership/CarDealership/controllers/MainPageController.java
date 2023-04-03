@@ -24,7 +24,7 @@ public class MainPageController {
         return advertisement;
     }
 
-    @PostMapping
+    @PostMapping("/advertisements")
     public Advertisement addAdvertisement(@RequestBody Advertisement advertisement) {
         return advertisementRepository.save(advertisement);
     }
