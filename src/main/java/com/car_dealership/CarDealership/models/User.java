@@ -17,6 +17,9 @@ public class User {
     private String lastName;
     @Column(name = "email")
     private String email;
+    @Column(name = "password")
+    private String password;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
