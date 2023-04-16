@@ -4,6 +4,8 @@ import com.car_dealership.CarDealership.models.Role;
 import com.car_dealership.CarDealership.models.User;
 import com.car_dealership.CarDealership.repositories.RoleRepository;
 import com.car_dealership.CarDealership.repositories.UserRepository;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
+@AllArgsConstructor
 public class UserService {
+
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private BCryptPasswordEncoder passwordEncoder;
@@ -24,8 +29,8 @@ public class UserService {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setUserRoles(roles);
-
-        return userRepository.save(user);
+        User newUser = userRepository.save(user);
+        return newUser;
     }
 
     public Iterable<User> getAll() {
