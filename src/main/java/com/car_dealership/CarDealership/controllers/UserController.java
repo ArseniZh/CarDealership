@@ -18,11 +18,4 @@ public class UserController {
         UserDto userDto = UserDto.DtoFromUser(user);
         return userDto;
     }
-
-    @PostMapping("/users/sign-up")
-    public UserDto addUser(@RequestBody User user) {
-        userService.registerUser(user);
-        UserDto userDto = UserDto.DtoFromUser(user);
-        return userDto;
-    }
 }
