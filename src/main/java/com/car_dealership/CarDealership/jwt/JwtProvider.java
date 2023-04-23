@@ -2,6 +2,7 @@ package com.car_dealership.CarDealership.jwt;
 
 import com.car_dealership.CarDealership.models.Role;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -36,5 +37,23 @@ public class JwtProvider {
     private Key getSignInKey() {
         Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
         return key;
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser().setSigningKey(secretWord).parseClaimsJws(token);
+            return !isTokenExpired(token); // check token expiration
+        } catch (IllegalArgumentException ex) {
+            throw new JwtException("Invalid token");
+        }
+    }
+
+    public boolean isTokenExpired(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(secretWord)
+                .parseClaimsJws(token)
+                .getBody();
+        Date expirationDate = claims.getExpiration();
+        return expirationDate.before(new Date());
     }
 }
