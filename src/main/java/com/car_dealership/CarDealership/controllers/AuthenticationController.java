@@ -27,11 +27,6 @@ public class AuthenticationController {
     public String loginUser(@RequestBody AuthenticationDto authenticationDto) {
         String email = authenticationDto.getEmail();
         User user = userService.findByEmail(email);
-
-        if (passwordEncoder.matches(authenticationDto.getPassword(), user.getPassword())) {
-            return "successful";
-        }
         return "no such user";
     }
-
 }
