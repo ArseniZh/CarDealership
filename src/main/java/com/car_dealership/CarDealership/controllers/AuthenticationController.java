@@ -2,7 +2,6 @@ package com.car_dealership.CarDealership.controllers;
 
 import com.car_dealership.CarDealership.dto.AuthenticationDto;
 import com.car_dealership.CarDealership.dto.UserDto;
-import com.car_dealership.CarDealership.jwt.JwtProvider;
 import com.car_dealership.CarDealership.models.User;
 import com.car_dealership.CarDealership.services.UserService;
 import lombok.AllArgsConstructor;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
     private UserService userService;
     private BCryptPasswordEncoder passwordEncoder;
-    private JwtProvider jwtProvider;
 
     @PostMapping("/users/sign-up")
     public UserDto addUser(@RequestBody User user) {
@@ -29,11 +27,6 @@ public class AuthenticationController {
     public String loginUser(@RequestBody AuthenticationDto authenticationDto) {
         String email = authenticationDto.getEmail();
         User user = userService.findByEmail(email);
-
-        if (passwordEncoder.matches(authenticationDto.getPassword(), user.getPassword())) {
-            return jwtProvider.createToken(email, user.getUserRoles());
-        }
         return "no such user";
     }
-
 }
