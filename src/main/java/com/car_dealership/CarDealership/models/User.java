@@ -1,9 +1,11 @@
 package com.car_dealership.CarDealership.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "users")
 public class User {

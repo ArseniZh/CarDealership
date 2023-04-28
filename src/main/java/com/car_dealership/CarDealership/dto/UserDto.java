@@ -12,7 +12,7 @@ public class UserDto {
     private String lastName;
     private String email;
 
-    public static UserDto DtoFromUser(User user) {
+    public static UserDto createDtoFromUser(User user) {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setFirstName(user.getFirstName());

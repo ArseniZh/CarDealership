@@ -33,7 +33,7 @@ public class UserService {
         return newUser;
     }
 
-    public Iterable<User> getAll() {
+    public List<User> getAll() {
         return userRepository.findAll();
     }
 
@@ -45,10 +45,6 @@ public class UserService {
 
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
-    }
-
-    public User createUser(User user) {
-        return userRepository.save(user);
     }
 
     public void deleteUser(User user) {
