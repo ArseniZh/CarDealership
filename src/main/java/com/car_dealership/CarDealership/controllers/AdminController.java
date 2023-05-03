@@ -35,7 +35,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin/users")
-    public User createUser(@RequestBody User user) {
-        return userService.registerUser(user);
+    public UserDto createUser(@RequestBody User user) {
+        return createDtoFromUser(userService.registerUser(user));
     }
 }
