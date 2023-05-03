@@ -15,18 +15,15 @@ public class Advertisement {
     private String author;
     @Column (name = "city")
     private String city;
-    @Column (name = "brand")
-    private String brand;
-    @Column (name = "model")
-    private String model;
-    @Column (name = "year")
-    private int year;
-    @Column (name = "mileage")
-    private long mileage;
     @Column (name = "price")
     private long price;
     @Column (name = "description" , columnDefinition = "text")
     private String description;
+
+    @OneToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "car_id", referencedColumnName = "id")
+    private Car car;
+
 
     public Advertisement() {
     }
@@ -41,22 +38,6 @@ public class Advertisement {
 
     public String getCity() {
         return this.city;
-    }
-
-    public String getBrand() {
-        return this.brand;
-    }
-
-    public String getModel() {
-        return this.model;
-    }
-
-    public int getYear() {
-        return this.year;
-    }
-
-    public long getMileage() {
-        return this.mileage;
     }
 
     public long getPrice() {
@@ -77,22 +58,6 @@ public class Advertisement {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public void setMileage(long mileage) {
-        this.mileage = mileage;
     }
 
     public void setPrice(long price) {
@@ -117,20 +82,33 @@ public class Advertisement {
         final Object this$city = this.getCity();
         final Object other$city = other.getCity();
         if (this$city == null ? other$city != null : !this$city.equals(other$city)) return false;
-        final Object this$brand = this.getBrand();
-        final Object other$brand = other.getBrand();
-        if (this$brand == null ? other$brand != null : !this$brand.equals(other$brand)) return false;
-        final Object this$model = this.getModel();
-        final Object other$model = other.getModel();
-        if (this$model == null ? other$model != null : !this$model.equals(other$model)) return false;
-        if (this.getYear() != other.getYear()) return false;
-        if (this.getMileage() != other.getMileage()) return false;
         if (this.getPrice() != other.getPrice()) return false;
         final Object this$description = this.getDescription();
         final Object other$description = other.getDescription();
         if (this$description == null ? other$description != null : !this$description.equals(other$description))
             return false;
+        final Object this$car = this.getCar();
+        final Object other$car = other.getCar();
+        if (this$car == null ? other$car != null : !this$car.equals(other$car)) return false;
         return true;
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $id = this.getId();
+        result = result * PRIME + ($id == null ? 43 : $id.hashCode());
+        final Object $author = this.getAuthor();
+        result = result * PRIME + ($author == null ? 43 : $author.hashCode());
+        final Object $city = this.getCity();
+        result = result * PRIME + ($city == null ? 43 : $city.hashCode());
+        final long $price = this.getPrice();
+        result = result * PRIME + (int) ($price >>> 32 ^ $price);
+        final Object $description = this.getDescription();
+        result = result * PRIME + ($description == null ? 43 : $description.hashCode());
+        final Object $car = this.getCar();
+        result = result * PRIME + ($car == null ? 43 : $car.hashCode());
+        return result;
     }
 
     protected boolean canEqual(final Object other) {
@@ -139,7 +117,6 @@ public class Advertisement {
 
     public String toString() {
         return "Advertisement(id=" + this.id + ", author=" + this.author + ", city=" + this.city +
-                ", brand=" + this.brand + ", model=" + this.model + ", year=" + this.year +
-                ", mileage=" + this.mileage + ", price=" + this.price + ", description=" + this.description + ")";
+                "price=" + this.price + ", description=" + this.description + ")";
     }
 }
