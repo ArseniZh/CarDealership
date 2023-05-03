@@ -5,6 +5,7 @@ import com.car_dealership.CarDealership.models.Advertisement;
 import com.car_dealership.CarDealership.models.Car;
 import com.car_dealership.CarDealership.repositories.AdvertisementRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 public class AdvertisementService {
     private AdvertisementRepository advertisementRepository;
     private CarService carService;
+    private UserService userService;
 
     public List<Advertisement> getAllAdvertisements() {
         return advertisementRepository.findAll();
@@ -42,6 +44,8 @@ public class AdvertisementService {
         advertisement.setPrice(advertisementDto.getPrice());
         advertisement.setDescription(advertisementDto.getDescription());
 
+        advertisement.setUser(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
+
         Car car = new Car();
         car.setBrand(advertisementDto.getBrand());
         car.setModel(advertisementDto.getModel());
@@ -50,6 +54,7 @@ public class AdvertisementService {
 
         advertisement.setCar(car);
         car.setAdvertisement(advertisement);
+
 
         carService.addCar(car);
         advertisementRepository.save(advertisement);

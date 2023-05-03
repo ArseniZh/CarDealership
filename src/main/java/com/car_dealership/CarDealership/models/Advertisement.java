@@ -24,6 +24,10 @@ public class Advertisement {
     @JoinColumn (name = "car_id", referencedColumnName = "id")
     private Car car;
 
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "user_id", referencedColumnName = "id")
+    private User user;
+
 
     public Advertisement() {
     }

@@ -28,6 +28,10 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private List<Role> userRoles;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Advertisement> advertisements;
+
+
     public User() {
     }
 
