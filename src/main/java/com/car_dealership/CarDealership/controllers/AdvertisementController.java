@@ -47,7 +47,8 @@ public class AdvertisementController {
     @PutMapping("/advertisements/{id}")
     public AdvertisementDto updateAdvertisement(@PathVariable("id") Advertisement advertisement, @RequestBody AdvertisementDto updatedAdvertisementDto)
             throws AccessDeniedException {
-        if (userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).getId() == advertisement.getUser().getId()) {
+        if (userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).getId()
+                == advertisement.getUser().getId()) {
             Advertisement updatedAdvertisement = advertisementService.updateAdvertisement(advertisement, updatedAdvertisementDto);
             Car car = updatedAdvertisement.getCar();
             return AdvertisementDto.createDtoFromAdvertisement(updatedAdvertisement, car);
@@ -58,7 +59,8 @@ public class AdvertisementController {
     @DeleteMapping("/advertisements/{id}")
     public void deleteAdvertisement(@PathVariable("id") Advertisement advertisement)
             throws AccessDeniedException {
-        if (userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).getId() == advertisement.getUser().getId()) {
+        if (userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).getId()
+                == advertisement.getUser().getId()) {
             advertisementService.deleteAdvertisement(advertisement);
             carService.deleteCar(advertisement.getCar());
         } else {

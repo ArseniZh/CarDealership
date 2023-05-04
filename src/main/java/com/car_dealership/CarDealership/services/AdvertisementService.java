@@ -39,7 +39,6 @@ public class AdvertisementService {
 
     public Advertisement saveAdvertisement(AdvertisementDto advertisementDto) {
         Advertisement advertisement = AdvertisementDto.createAdvertisementFromDto(advertisementDto);
-
         advertisement.setUser(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
 
         carService.addCar(advertisement.getCar());
