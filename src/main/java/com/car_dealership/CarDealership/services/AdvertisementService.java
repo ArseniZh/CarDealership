@@ -38,25 +38,11 @@ public class AdvertisementService {
     }
 
     public Advertisement saveAdvertisement(AdvertisementDto advertisementDto) {
-        Advertisement advertisement = new Advertisement();
-        advertisement.setAuthor(advertisementDto.getAuthor());
-        advertisement.setCity(advertisementDto.getCity());
-        advertisement.setPrice(advertisementDto.getPrice());
-        advertisement.setDescription(advertisementDto.getDescription());
+        Advertisement advertisement = AdvertisementDto.createAdvertisementFromDto(advertisementDto);
 
         advertisement.setUser(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
 
-        Car car = new Car();
-        car.setBrand(advertisementDto.getBrand());
-        car.setModel(advertisementDto.getModel());
-        car.setYear(advertisementDto.getYear());
-        car.setMileage(advertisementDto.getMileage());
-
-        advertisement.setCar(car);
-        car.setAdvertisement(advertisement);
-
-
-        carService.addCar(car);
+        carService.addCar(advertisement.getCar());
         advertisementRepository.save(advertisement);
         return advertisement;
     }

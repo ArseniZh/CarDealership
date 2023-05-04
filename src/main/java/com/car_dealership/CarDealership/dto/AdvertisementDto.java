@@ -31,4 +31,22 @@ public class AdvertisementDto {
 
         return advertisementDto;
     }
+
+    public static Advertisement createAdvertisementFromDto(AdvertisementDto advertisementDto) {
+        Advertisement advertisement = new Advertisement();
+        advertisement.setAuthor(advertisementDto.getAuthor());
+        advertisement.setCity(advertisementDto.getCity());
+        advertisement.setPrice(advertisementDto.getPrice());
+        advertisement.setDescription(advertisementDto.getDescription());
+
+        Car car = new Car();
+        car.setBrand(advertisementDto.getBrand());
+        car.setModel(advertisementDto.getModel());
+        car.setYear(advertisementDto.getYear());
+        car.setMileage(advertisementDto.getMileage());
+
+        advertisement.setCar(car);
+        car.setAdvertisement(advertisement);
+        return advertisement;
+    }
 }
